@@ -96,32 +96,21 @@ style: |
 ---
 
 <!-- _class: lead -->
-<!-- _paginate: false -->
 
-# Scalable Sensor Placement for Air Quality via Gradient-Based Optimization of Mutual Information
+# Towards Scalable and Policy-Compliant Sensor Placement for Large-Scale Air Quality Monitoring
 
-<div class="author-row">
-<div class="author">
-<img src="assets/images/authors/zeel_white.png" />
-<div class="author-name">Zeel B Patel</div>
-</div>
-<div class="author">
-<img src="assets/images/authors/vinayak_white.png" />
-<div class="author-name">Vinayak Rana</div>
-</div>
-<div class="author">
-<img src="assets/images/authors/nipun_white.png" />
-<div class="author-name">Nipun Batra</div>
-</div>
-</div>
+<br><br>
 
-AAAI 2026 · AI for Social Impact Track
+**Vinayak Rana**
 
-<div class="logo-row">
-<img src="assets/images/aaai_logo.png" />
-<img src="assets/images/iitgn_logo.png" />
-<img src="assets/images/logo_colored.svg" />
-</div>
+<br>
+
+**Advisor:** Prof. Nipun Batra  
+
+<br>
+
+Thesis Defense  
+May 2026
 
 ---
 
@@ -544,33 +533,20 @@ GD-MI within **0.2 RMSE** of Greedy MI (gold standard)
 
 ---
 
-# Limitations & Future Work
 
-<div class="cols">
-<div class="col">
+# GD-MI: Limitations
 
-**Current Limitation**
+- Optimizes in **continuous space**
+  → cannot enforce real-world deployment constraints  
 
-We minimize **average** variance, but pollution burden is **not uniform**
+- May select **invalid / impractical locations**
+  (e.g., inaccessible terrain)
 
-**Equity-Aware Placement:**
-$$\mathcal{L}_{\text{fair}} = \mathbb{E}\Big[w(x_t) \cdot \text{Var}(y_t)\Big]$$
+- Assumes **uniform importance**
+  → ignores population / exposure differences  
 
-Weight by population, pollution, health vulnerability
-
-</div>
-<div class="col">
-
-**Beyond Static Sensors**
-
-- **Low-cost sensors:** Dense affordable networks
-- **Mobile sensing:** Dynamic routing optimization
-- **Multi-pollutant:** Joint PM₂.₅, NO₂, O₃
-
-Same GD-MI framework, different objectives!
-
-</div>
-</div>
+- **Non-convex optimization**
+  → solutions depend on initialization  
 
 ---
 
@@ -578,9 +554,9 @@ Same GD-MI framework, different objectives!
 
 ![bg contain](assets/images/sustainability_lab_prompt_subtitles_generated_20251217_162815.png)
 
----
+<!-- --- -->
 
-# Main Takeaways
+<!-- # Main Takeaways
 
 1. **GD-MI** = First gradient-based MI maximization for sensor placement
 
@@ -589,14 +565,13 @@ Same GD-MI framework, different objectives!
 
 3. **Quality preserved:** Matches Greedy MI where tractable, **4% better** than MaxVar at scale
 
-4. **Real-world ready:** Deployed framework for India air quality monitoring
+4. **Real-world ready:** Deployed framework for India air quality monitoring -->
 
----
+<!-- --- -->
 
-<!-- _class: lead -->
 <!-- _paginate: false -->
 
-# Thank You!
+<!-- # Thank You!
 
 <div style="display:flex; justify-content:center; gap:3rem; margin:1.5rem 0;">
 <div class="qr" style="text-align:center;">
@@ -613,11 +588,11 @@ Same GD-MI framework, different objectives!
 
 Positions: PhD · Postdoc · RA · Intern
 
-{patel_zeel, vinayak.rana, nipun.batra}@iitgn.ac.in
+{patel_zeel, vinayak.rana, nipun.batra}@iitgn.ac.in -->
 
----
+<!-- --- -->
 
-<!-- _paginate: false -->
+<!-- _paginate: false
 
 # Backup Slides
 
@@ -688,4 +663,342 @@ Soft penalty grows exponentially as <span class="green">sensors</span> drift tow
 
 # More Results: k = 100
 
-![width:700px center](assets/images/quality_100_india.png)
+![width:700px center](assets/images/quality_100_india.png) -->
+
+---
+
+<!-- _class: lead -->
+
+# Beyond GD-MI: Discrete Deployment Constraints
+
+**GD-MI optimizes continuous coordinates** — but real deployments are different
+
+---
+
+# Why GD-MI Is Not Enough
+
+> GD-MI answers: **where ideally?**  
+
+> Real world asks: **where allowed?**
+
+---
+
+# Regional Budget Constraints
+
+<div class="cols">
+<div class="col" style="flex: 1.7;">
+
+![width:100% center](assets/images/gsm_constraints_map.png)
+
+</div>
+<div class="col" style="flex: 0.5;">
+
+> Sensors are allocated **per state**
+
+- $k_r$ budget per state
+- Select from candidate pool  
+
+**Constraint:**  
+exactly $k_r$ per state
+
+> GD-MI cannot enforce: *"exactly $k_r$ sensors in state $r$"*
+
+</div>
+</div>
+
+---
+
+# From Constraints to Selection
+
+> Each sensor must choose one location from its state's candidate pool
+
+<br>
+
+![width:1100px center](assets/images/bridge_slide_1.svg)
+
+---
+
+# From Constraints to Selection
+
+> Represent this as a probability distribution over candidates
+
+<br>
+
+![width:1100px center](assets/images/bridge_slide_2.svg)
+
+---
+
+# From Constraints to Selection
+
+> **argmax** picks the highest probability location
+
+<br>
+
+![width:1100px center](assets/images/bridge_slide_3.svg)
+
+---
+
+# From Constraints to Selection
+
+> But **argmax** is not differentiable — gradients cannot flow through it
+
+<br>
+
+![width:1100px center](assets/images/bridge_slide_4.svg)
+
+---
+
+<!-- _class: lead -->
+
+# How do we make sampling differentiable?
+
+---
+
+
+# Gumbel-Softmax: Making Sampling Differentiable
+
+![width:90% center](assets/images/gsm_reparam_v3.svg)
+
+---
+
+
+# GSM: How It Works
+
+
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{gray}{W_{i,j}} + \textcolor{gray}{M_{i,j}} + \textcolor{gray}{g_{i,j}}) / \textcolor{gray}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{gray}{W_{i,v}} + \textcolor{gray}{M_{i,v}} + \textcolor{gray}{g_{i,v}}) / \textcolor{gray}{\tau}\right)}$$
+
+<br>
+
+> Don't worry about the complexity — let's go term by term
+
+---
+
+# GSM: How It Works
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{#e07b00}{W_{i,j}} + \textcolor{gray}{M_{i,j}} + \textcolor{gray}{g_{i,j}}) / \textcolor{gray}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{#e07b00}{W_{i,v}} + \textcolor{gray}{M_{i,v}} + \textcolor{gray}{g_{i,v}}) / \textcolor{gray}{\tau}\right)}$$
+
+<br>
+
+> $\textcolor{#e07b00}{W}$ — learnable logits, one row per sensor, one column per candidate location
+
+---
+
+# The learnable logit matrix W
+
+![width:900px center](assets/images/W_matrix_logits.svg)
+
+---
+
+# GSM: How It Works
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{#e07b00}{W_{i,j}} + \textcolor{#2e86ab}{M_{i,j}} + \textcolor{gray}{g_{i,j}}) / \textcolor{gray}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{#e07b00}{W_{i,v}} + \textcolor{#2e86ab}{M_{i,v}} + \textcolor{gray}{g_{i,v}}) / \textcolor{gray}{\tau}\right)}$$
+
+<br>
+
+> $\textcolor{#2e86ab}{M}$ — regional mask: sets out-of-state entries to $-\infty$ → probability = 0
+
+---
+
+# Enforcing regional budgets via masking
+
+![width:900px center](assets/images/regional_mask.svg)
+
+---
+
+# GSM: How It Works
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{#e07b00}{W_{i,j}} + \textcolor{#2e86ab}{M_{i,j}} + \textcolor{#2f9e44}{g_{i,j}}) / \textcolor{gray}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{#e07b00}{W_{i,v}} + \textcolor{#2e86ab}{M_{i,v}} + \textcolor{#2f9e44}{g_{i,v}}) / \textcolor{gray}{\tau}\right)}$$
+
+<br>
+
+> $\textcolor{#2f9e44}{g}$ — Gumbel noise: constant in backward pass — this is the reparameterisation trick
+
+---
+
+# GSM: How It Works
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{#e07b00}{W_{i,j}} + \textcolor{#2e86ab}{M_{i,j}} + \textcolor{#2f9e44}{g_{i,j}}) / \textcolor{#9b59b6}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{#e07b00}{W_{i,v}} + \textcolor{#2e86ab}{M_{i,v}} + \textcolor{#2f9e44}{g_{i,v}}) / \textcolor{#9b59b6}{\tau}\right)}$$
+
+<br>
+
+> $\textcolor{#9b59b6}{\tau}$ — temperature: high $\tau$ → explore broadly, low $\tau$ → commit to one location
+
+---
+
+# GSM: How It Works
+
+$$\pi_{i,j} = \frac{\exp\!\left((\textcolor{#e07b00}{W_{i,j}} + \textcolor{#2e86ab}{M_{i,j}} + \textcolor{#2f9e44}{g_{i,j}}) / \textcolor{#9b59b6}{\tau}\right)}{\sum_{v} \exp\!\left((\textcolor{#e07b00}{W_{i,v}} + \textcolor{#2e86ab}{M_{i,v}} + \textcolor{#2f9e44}{g_{i,v}}) / \textcolor{#9b59b6}{\tau}\right)}$$
+
+<br>
+
+- $\textcolor{#e07b00}{W}$ — learnable logits   
+- $\textcolor{#2e86ab}{M}$ — regional mask
+- $\textcolor{#2f9e44}{g}$ — Gumbel noise 
+- $\textcolor{#9b59b6}{\tau}$ — temperature
+
+
+---
+
+# Does It Converge? Training Dynamics
+ 
+<div class="cols">
+<div class="col" style="flex: 1.4;">
+
+![width:100% center](assets/images/sensor_training_dynamics_stacked2.jpg)
+ 
+</div>
+<div class="col" style="flex: 0.7;">
+
+**(a) Objective + temperature**
+- Predictive variance falls steadily
+- High $\tau$ → exploration; low $\tau$ → exploitation
+
+**(b) Location update count**
+- Sensors move frequently early on
+- Updates taper to zero as $\tau \to 0$
+> No post-hoc projection needed — the relaxation self-stabilizes into a valid discrete solution
+ 
+</div>
+</div>
+
+---
+
+
+<!-- _class: lead -->
+
+# Experiments
+
+Does GSM actually work?
+
+---
+
+# Regional Validation: GSM vs Baselines
+
+<!-- > Same Madhya Pradesh setup ($n=308$, $k=8$) -->
+
+<div class="cols">
+<div class="col">
+
+![width:620px center](assets/images/mp_rmse_runtime_stacked.jpg)
+
+</div>
+<div class="col">
+
+| Method | RMSE ↓ |
+|:-------|-------:|
+| Random | 6.50 |
+| MaxVar | 6.41 |
+| **GSM (Ours)** | **6.12** |
+| Greedy MI | 5.74 |
+
+GSM closes most of the gap to Greedy MI — at **far lower cost**
+
+</div>
+</div>
+
+---
+
+ 
+# Continental Results: Unconstrained Deployment
+ 
+<div class="cols">
+<div class="col" style="flex: 1.4;">
+
+![width:100%](assets/images/india-test-rmse-plot.jpg)
+ 
+</div>
+<div class="col" style="flex: 0.7;">
+
+> No state budget constraints — pure joint optimization
+ 
+- **GSM lowest** at every budget
+- Gap **widens** with more sensors
+- Greedy methods pick **redundant** locations
+
+</div>
+</div>
+
+---
+
+# Main Result: Constrained Deployment
+ 
+<div class="cols">
+<div class="col" style="flex: 1.3;">
+
+| Strategy | All-India RMSE ↓ |
+|:---------|----------------:|
+| Existing network | 9.25 ± 0.00 |
+| Random | 7.69 ± 0.15 |
+| Greedy MaxVar | 7.46 ± 0.00 |
+| GSM Indep *(ours)* | 7.42 ± 0.09 |
+| **GSM Joint (ours)** | **7.27 ± 0.03** |
+ 
+</div>
+<div class="col" style="flex: 0.75;">
+
+- **21.4%** reduction in national prediction error over existing network
+ 
+- **13/32** states where GSM Joint achieves lowest RMSE
+ 
+- **Joint > Indep** — cross-border gradients capture transboundary pollution structure
+ 
+</div>
+</div>
+
+---
+
+ 
+<!-- _class: lead -->
+
+# Why does GSM Joint perform better?
+
+---
+# Qualitative Comparison of Deployments
+ 
+![width:100% center](assets/images/india-plots-chloro.jpeg)
+
+---
+
+# GSM: Limitations
+
+- Uses a **continuous relaxation**
+  → introduces approximation error  
+
+- Sensitive to **temperature (τ) scheduling**
+  → affects convergence stability  
+
+- Optimization complexity increases with **k**
+  → harder joint selection  
+
+- **Non-convex optimization over logits**
+  → sensitive to initialization; multiple local optima  
+ 
+---
+
+
+# Future Work
+
+- **Equity-aware placement**
+  → weight by population, pollution, vulnerability  
+
+- **Dynamic sensing**
+  → mobile sensors, adaptive placement  
+
+- **Multi-pollutant optimization**
+  → PM₂.₅, NO₂, O₃ jointly  
+
+- **Improved discrete relaxations**
+  → Top-K, optimal transport (Sinkhorn)
+
+---
+
+# <span style="color:black">Publications</span>
+
+• <span style="color:black"><b>Scalable Air-Quality Sensor Placement via Gradient-Based Mutual Information Maximization (AAAI 2026 — AI for Social Impact)</b></span>  
+  <span style="color:black"><small>Zeel B Patel, <u><b>Vinayak Rana</b></u>, Nipun Batra</small></span>
+
+<br>
+
+• <span style="color:black"><b>Large-Scale Air-Quality Sensor Placement via Joint Optimization under Regional Constraints (Under Review)</b></span>  
+  <span style="color:black"><small><u><b>Vinayak Rana</b></u>, Neerja Kasture, Anura Mantri, Nipun Batra</small></span>

@@ -9,7 +9,7 @@
     <marker id="arrow-green" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
       <path d="M0,0 L10,5 L0,10 Z" fill="green"/>
     </marker>
-  </defs>
+  <mask id="imagine-text-gaps-jsbc0n" maskUnits="userSpaceOnUse"><rect x="143" y="19.600000381469727" width="844.237548828125" height="400.3999938964844" fill="white"/><rect x="155.96250915527344" y="17.600000381469727" width="238.0749969482422" height="26.399999618530273" fill="black" rx="2"/><rect x="658.7625122070312" y="17.600000381469727" width="332.4750061035156" height="26.399999618530273" fill="black" rx="2"/><rect x="260.6125183105469" y="84" width="32.80000114440918" height="28.80000114440918" fill="black" rx="2"/><rect x="245.9875030517578" y="194.40000915527344" width="58.51708984375" height="20.80000114440918" fill="black" rx="2"/><rect x="237.49375915527344" y="216" width="74.59443664550781" height="18.40000057220459" fill="black" rx="2"/><rect x="264.8812561035156" y="314" width="20.800000190734863" height="28.80000114440918" fill="black" rx="2"/><rect x="100.05000305175781" y="211" width="109.9000015258789" height="18.40000057220459" fill="black" rx="2"/><rect x="632.9312744140625" y="111" width="74.13750457763672" height="18.40000057220459" fill="black" rx="2"/><rect x="639.3187866210938" y="129.8000030517578" width="61.36249923706055" height="17.600000381469727" fill="black" rx="2"/><rect x="810.6124877929688" y="84" width="32.80000114440918" height="28.80000114440918" fill="black" rx="2"/><rect x="760.8624877929688" y="193.1999969482422" width="128.4093780517578" height="20" fill="black" rx="2"/><rect x="777.6375122070312" y="216.8000030517578" width="95.1128921508789" height="17.600000381469727" fill="black" rx="2"/><rect x="814.8812866210938" y="334" width="20.800000190734863" height="28.80000114440918" fill="black" rx="2"/><rect x="905.8937377929688" y="211" width="88.4207992553711" height="18.40000057220459" fill="black" rx="2"/></mask></defs>
 
   <!-- Titles -->
   <text x="275" y="38" font-size="20" font-family="sans-serif" font-weight="600" text-anchor="middle" fill="black" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:20px;font-weight:600;text-anchor:middle;dominant-baseline:auto">Hard Selection (argmax)</text>
@@ -27,7 +27,7 @@
   <!-- W -> argmax -->
   <line x1="275" y1="128" x2="275" y2="168" stroke="black" stroke-width="1.5" marker-end="url(#arrow)" style="fill:rgb(0, 0, 0);stroke:rgb(0, 0, 0);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
 
-  <!-- argmax node (circle, red tint) -->
+  <!-- argmax node -->
   <circle cx="275" cy="215" r="45" fill="#f8d7da" stroke="#aaa" stroke-width="1.5" style="fill:rgb(248, 215, 218);stroke:rgb(170, 170, 170);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
   <text x="275" y="210" text-anchor="middle" font-size="15" font-family="sans-serif" fill="black" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:15px;font-weight:400;text-anchor:middle;dominant-baseline:auto">argmax</text>
   <text x="275" y="230" text-anchor="middle" font-size="13" font-family="sans-serif" fill="#555" style="fill:rgb(85, 85, 85);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:13px;font-weight:400;text-anchor:middle;dominant-baseline:auto">z = one-hot</text>
@@ -40,8 +40,10 @@
   <text x="275" y="336" text-anchor="middle" font-size="22" font-family="sans-serif" font-style="italic" fill="black" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:22px;font-weight:400;font-style:italic;text-anchor:middle;dominant-baseline:auto">L</text>
 
   <!-- red dashed gradient arrow -->
-  <line x1="172" y1="335" x2="172" y2="95" stroke="red" stroke-width="2" stroke-dasharray="7,4" marker-end="url(#arrow-red)" style="fill:rgb(0, 0, 0);stroke:rgb(255, 0, 0);color:rgb(255, 255, 255);stroke-width:2px;stroke-dasharray:7px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="110" y="222" text-anchor="middle" font-size="14" font-family="sans-serif" fill="red" style="fill:rgb(255, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:14px;font-weight:400;text-anchor:middle;dominant-baseline:auto">∂L/∂W = 0</text>
+  <line x1="172" y1="335" x2="172" y2="95" stroke="red" stroke-width="2" stroke-dasharray="7,4" marker-end="url(#arrow-red)" mask="url(#imagine-text-gaps-jsbc0n)" style="fill:rgb(0, 0, 0);stroke:rgb(255, 0, 0);color:rgb(255, 255, 255);stroke-width:2px;stroke-dasharray:7px, 4px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- label: gradients blocked -->
+  <text x="155" y="225" text-anchor="middle" font-size="13" font-family="sans-serif" fill="red" transform="rotate(-90 155 225)" style="fill:rgb(255, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:13px;font-weight:400;text-anchor:middle;dominant-baseline:auto">gradients blocked</text>
 
   <!-- ══ RIGHT PANEL ══ -->
 
@@ -73,7 +75,9 @@
   <line x1="825" y1="243" x2="825" y2="320" stroke="black" stroke-width="1.5" marker-end="url(#arrow)" style="fill:rgb(0, 0, 0);stroke:rgb(0, 0, 0);color:rgb(255, 255, 255);stroke-width:1.5px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
 
   <!-- green gradient arrow -->
-  <line x1="932" y1="355" x2="932" y2="95" stroke="green" stroke-width="2" marker-end="url(#arrow-green)" style="fill:rgb(0, 0, 0);stroke:rgb(0, 128, 0);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
-  <text x="948" y="230" text-anchor="start" font-size="14" font-family="sans-serif" fill="green" style="fill:rgb(0, 128, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:14px;font-weight:400;text-anchor:start;dominant-baseline:auto">∂L/∂W ≠ 0</text>
+  <line x1="932" y1="355" x2="932" y2="95" stroke="green" stroke-width="2" marker-end="url(#arrow-green)" mask="url(#imagine-text-gaps-jsbc0n)" style="fill:rgb(0, 0, 0);stroke:rgb(0, 128, 0);color:rgb(255, 255, 255);stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- label: gradients flow -->
+  <text x="950" y="225" text-anchor="middle" font-size="13" font-family="sans-serif" fill="green" transform="rotate(-90 950 225)" style="fill:rgb(0, 128, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:sans-serif;font-size:13px;font-weight:400;text-anchor:middle;dominant-baseline:auto">gradients flow</text>
 
 </svg>

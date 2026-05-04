@@ -341,6 +341,25 @@ Can we get **both**?
 
 ---
 
+
+<!-- _class: lead -->
+
+# GD-MI: Gradient-Based Mutual Information Maximization
+
+Scalable sensor placement via continuous optimization
+
+<br>
+<br>
+<br>
+
+**Publication (AAAI 2026 — AI for Social Impact)**
+
+Scalable Air-Quality Sensor Placement via Gradient-Based Mutual Information Maximization  
+
+<small>Zeel B Patel, <u><b>Vinayak Rana</b></u>, Nipun Batra</small>
+
+---
+
 # Our Solution: GD-MI
 
 > **Key insight:** Don't search discrete candidates — **optimize coordinates directly!**
@@ -548,11 +567,11 @@ GD-MI within **0.2 RMSE** of Greedy MI (gold standard)
 - **Non-convex optimization**
   → solutions depend on initialization  
 
----
+<!-- --- -->
 
 <!-- _paginate: false -->
 
-![bg contain](assets/images/sustainability_lab_prompt_subtitles_generated_20251217_162815.png)
+<!-- ![bg contain](assets/images/sustainability_lab_prompt_subtitles_generated_20251217_162815.png) -->
 
 <!-- --- -->
 
@@ -669,17 +688,19 @@ Soft penalty grows exponentially as <span class="green">sensors</span> drift tow
 
 <!-- _class: lead -->
 
-# Beyond GD-MI: Discrete Deployment Constraints
+# GSM: Gumbel-Softmax for Constrained Sensor Placement
 
-**GD-MI optimizes continuous coordinates** — but real deployments are different
+Differentiable discrete selection under regional constraints
 
----
+<br>
+<br>
+<br>
 
-# Why GD-MI Is Not Enough
+**Publication (Under Review)**
 
-> GD-MI answers: **where ideally?**  
+Large-Scale Air-Quality Sensor Placement via Joint Optimization under Regional Constraints  
 
-> Real world asks: **where allowed?**
+<small><u><b>Vinayak Rana</b></u>, Neerja Kasture, Anura Mantri, Nipun Batra</small>
 
 ---
 

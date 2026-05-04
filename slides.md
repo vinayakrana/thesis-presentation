@@ -99,18 +99,21 @@ style: |
 
 # Towards Scalable and Policy-Compliant Sensor Placement for Large-Scale Air Quality Monitoring
 
-<br><br>
+<br>
 
 **Vinayak Rana**
+
+M.Tech in Artificial Intelligence  
+Indian Institute of Technology Gandhinagar  
 
 <br>
 
 **Advisor:** Prof. Nipun Batra  
 
-<br>
+**DSC Members:** Prof. Manoj Gupta, Prof. Sameer Patel  
+
 
 Thesis Defense  
-May 2026
 
 ---
 
@@ -129,7 +132,7 @@ May 2026
 <div class="cols">
 <div class="col">
 
-<img src="assets/images/india_pm_with_stations.png" style="max-height:400px;" />
+<img src="assets/images/india_with_stations.png" style="max-height:400px;" />
 
 </div>
 <div class="col">
@@ -148,7 +151,7 @@ May 2026
 
 ---
 
-# The Coverage Gap
+<!-- # The Coverage Gap
 
 <div class="cols">
 <div class="col">
@@ -169,9 +172,9 @@ No data → No policy → No protection
 </div>
 </div>
 
----
+--- -->
 
-# Global Comparison: Room for Growth
+<!-- # Global Comparison: Room for Growth
 
 | Country | Stations ↑ | People/Station ↓ | Stations/1000 km² ↑ |
 |---------|----------:|--------------:|-----------------:|
@@ -183,19 +186,17 @@ No data → No policy → No protection
 
 India has **33× more people per station** than USA — significant opportunity for expansion
 
----
+--- -->
 
 # Why Not Just Add More Sensors?
 
 **Full CPCB CAAQMS** (BAM + gases + shelter): **₹2-3 crore+** per station
 
-| | Cost (₹) | Cost ($) |
-|:--|--:|--:|
-| 1 station | ₹2-3 crore | $250-350K |
-| 100 stations | ₹200-300 crore | $25-35M |
-| 1,000 stations | ₹2,000-3,000 crore | $250-350M |
+- Large-scale deployment → extremely costly  
 
 Current CPCB network: ~600 stations
+
+<br>
 
 > **Smart placement is critical** — every sensor must maximize value!
 
@@ -239,14 +240,14 @@ $k$ — Budget for new sensors
 
 ---
 
-# Optimal Sensor Placement (OSP)
+<!-- # Optimal Sensor Placement (OSP)
 
 | | |
 |:--|:--|
 | **1. Surrogate Model** — Predicts values + uncertainty; must be differentiable | ![width:360px](assets/images/surrogate_output_20260122_180321.png) |
 | **2. Acquisition Function** — Scores candidates; guides placement | ![width:360px](assets/images/acquisition_scores_20260122_180345.png) |
 
----
+--- -->
 
 # Acquisition 1: Random
 
@@ -298,13 +299,15 @@ $$\max_{\color{#00a651}{X_{\text{new}}}} I \;\equiv\; \min_{\color{#00a651}{X_{\
 
 **For Gaussian outputs** (GP/Neural Process): $H \propto \log \sigma^2$ → both use variance
 
-| | MaxVar | MI |
+<!-- | | MaxVar | MI |
 |:--|:------:|:--:|
 | Optimizes for | Single point | <span class="blue">Entire target region</span> |
-| Variance | **at candidate** | **over target region** |
+| Variance | **at candidate** | **over target region** | -->
 
-- MaxVar: *"where am I uncertain?"*
+- MaxVar: *"where am I most uncertain?"*
 - MI: *"what reduces uncertainty everywhere?"*
+
+<br>
 
 **Problem:** Exact MI requires searching $\binom{n}{k}$ subsets — combinatorially explosive!
 
@@ -778,7 +781,7 @@ exactly $k_r$ per state
 
 # Gumbel-Softmax: Making Sampling Differentiable
 
-![width:90% center](assets/images/gsm_reparam_v3.svg)
+![width:90% center](assets/images/gsm_reparam.svg)
 
 ---
 

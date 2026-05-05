@@ -240,12 +240,27 @@ $k$ — Budget for new sensors
 
 ---
 
-<!-- # Optimal Sensor Placement (OSP)
+# Optimal Sensor Placement (OSP)
 
 | | |
 |:--|:--|
 | **1. Surrogate Model** — Predicts values + uncertainty; must be differentiable | ![width:360px](assets/images/surrogate_output_20260122_180321.png) |
 | **2. Acquisition Function** — Scores candidates; guides placement | ![width:360px](assets/images/acquisition_scores_20260122_180345.png) |
+
+---
+
+<!-- # From Prediction to Placement
+
+> Not all locations are equally informative
+
+<br>
+
+- Some regions are **well-understood**
+- Some regions are **uncertain**
+
+<br>
+
+> Place sensors where they reduce uncertainty the most
 
 --- -->
 
@@ -991,9 +1006,6 @@ GSM closes most of the gap to Greedy MI — at **far lower cost**
 
 - Sensitive to **temperature (τ) scheduling**
   → affects convergence stability  
-
-- Optimization complexity increases with **k**
-  → harder joint selection  
 
 - **Non-convex optimization over logits**
   → sensitive to initialization; multiple local optima  
